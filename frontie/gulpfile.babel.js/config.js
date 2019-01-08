@@ -37,6 +37,10 @@ export const paths = {
   copy: {
     src: 'src/robots.txt',
     dest: 'dist/'
+  },
+  wp: {
+    proxy: 'boilerplate-frontie-susty.local',
+    src: '../**/*.php',
   }
 };
 

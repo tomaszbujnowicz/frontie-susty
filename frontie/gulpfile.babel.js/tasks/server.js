@@ -14,9 +14,7 @@ import { paths } from "../config";
 
 export function serve(cb) {
   browserSync.init({
-    server: {
-      baseDir: [ paths.dest ]
-    },
+    proxy: paths.wp.proxy,
     notify: false
   });
   cb();

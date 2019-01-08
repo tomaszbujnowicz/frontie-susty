@@ -165,3 +165,8 @@ function susty_dequeue_dashicons() {
 		wp_deregister_style( 'dashicons' );
 	}
 }
+
+/**
+ * Enqueue Frontie scripts and styles.
+ */
+require get_template_directory() . '/inc/enqueue.php';
