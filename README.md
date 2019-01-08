@@ -1,4 +1,4 @@
-# Frontie Webpack - Front-end Boilerplate + [Susty WP](https://sustywp.com)
+# Frontie Webpack - Front-end Boilerplate + Starter WordPress Theme called [Susty WP](https://github.com/jacklenox/susty)
 
 **🚀 Gulp 4 + Webpack 4 + Babel + BrowserSync + ITCSS Architecture + BEM Methodology**
 
