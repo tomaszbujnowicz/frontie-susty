@@ -1,0 +1,221 @@
+/**
+ * Navbar
+ */
+
+$navbar: (
+ 'height-desktop': 80px,
+ 'height-mobile': 50px,
+ 'bg-color': #fafafa,
+ 'link-color': $primary,
+ 'hover-link-color': darken($primary, 15%),
+ 'toggler-size': 8px,
+ 'z-index': 1000,
+ 'z-index-toggler': 1010
+);
+
+@function navbar($key) {
+  @return map-get($navbar, $key);
+}
+
+.navbar {
+  background-color: navbar(bg-color);
+  z-index: navbar(z-index);
+  &__wrapper {
+    display: flex;
+    align-items: center;
+  }
+  &__brand {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  &__toggler {
+    display: none;
+    &:focus {
+      outline: none;
+    }
+  }
+  &__menu {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .menu-item {
+    a {
+      transition: $transition-base;
+      color: navbar(link-color);
+    }
+  }
+  .menu-item,
+  .current-menu-item {
+    a {
+      color: navbar(hover-link-color);
+      text-decoration: none;
+    }
+  }
+
+  // Media: Small devices and down
+
+  @include media-breakpoint-down(sm) {
+    &__wrapper {
+      height: navbar(height-mobile);
+    }
+    &__collapse,
+    &__toggler,
+    &__toggler-link {
+      transition: $transition-base;
+    }
+    &__collapse {
+      opacity: 0;
+      visibility: hidden;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      pointer-events: auto;
+    }
+    &__toggler {
+      display: inline-block;
+      position: relative;
+      margin: 0;
+      margin-left: auto;
+      padding: 0;
+      background: none;
+      border: none;
+      border-radius: 0;
+      width: navbar(toggler-size) * 5;
+      height: navbar(toggler-size) * 4;
+      cursor: pointer;
+      z-index: navbar(z-index-toggler);
+    }
+    &__toggler-line {
+      display: block;
+      position: absolute;
+      top: navbar(toggler-size);
+      left: navbar(toggler-size);
+      background-color: black;
+      height: 1px;
+      width: navbar(toggler-size) * 3;
+      &:nth-child(2) {
+        top: navbar(toggler-size) * 2;
+      }
+      &:nth-child(3) {
+        top: navbar(toggler-size) * 3;
+      }
+    }
+    &__menu {
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: navbar(bg-color);
+      padding: 2rem 0; // add some top / bottom padding in case there is more items that doesn't fit in the viewport
+    }
+    .menu-item {
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+    }
+    body.navbar--opened & {
+      &__collapse {
+        visibility: visible;
+        opacity: 1;
+      }
+      &__toggler-line {
+        &:nth-child(1) {
+          top: navbar(toggler-size) * 2;
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          top: navbar(toggler-size) * 2;
+          transform: rotate(-45deg);
+        }
+      }
+      &__toggler {
+        &:hover {
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+
+  // Media: Medium devices and up
+
+  @include media-breakpoint-up(md) {
+    &__wrapper {
+      height: navbar(height-desktop);
+    }
+    &__brand {
+      margin-right: auto;
+    }
+    &__menu {
+      flex-direction: row;
+    }
+    .menu-item {
+      &:not(:last-child) {
+        margin-right: 2rem;
+      }
+    }
+  }
+
+  // Navbar Fixed
+
+  &.navbar--fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  // Make navbar transparent when scrolling down
+
+  &.navbar--fixed-transparent.navbar--scrolled {
+    transition: $transition-base;
+    opacity: .25;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  // Navbar slides out of view when scrolling down and slides back in when scrolling up
+
+  &.navbar--fixed-showhide {
+    transition: $transition-base;
+    body.navbar--opened & {
+      transform: none;
+    }
+    &.is-hidden {
+      transform: translateY(-100%);
+    }
+    &.is-visible {
+      transform: translateY(0);
+    }
+  }
+
+}
+
+// Prevent vertical scrollbar when navbar is opened on smaller devices
+
+body.navbar--opened {
+  overflow: hidden;
+}
+
+// When the navbar is fixed you should also add some padding to body tag as well - most likely that should be height of the navbar
+
+body {
+  @include media-breakpoint-down(sm) {
+    padding-top: navbar(height-mobile);
+  }
+  @include media-breakpoint-up(md) {
+    padding-top: navbar(height-desktop);
+  }
+}
