@@ -39,7 +39,7 @@ export const paths = {
     dest: 'dist/'
   },
   wp: {
-    proxy: 'boilerplate-frontie-susty.local',
+    proxy: 'YOURSITE.local',
     src: '../**/*.php',
   }
 };
