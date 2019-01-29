@@ -18,12 +18,12 @@ if ( ! function_exists( 'susty_wp_enqueue' ) ) {
 		$the_theme = wp_get_theme();
 		$theme_version = $the_theme->get( 'Version' );
 
-		$css_version = $theme_version . '.' . filemtime(get_template_directory() . '/frontie/dist/css/main.css');
-		wp_enqueue_style( 'susty-styles', get_stylesheet_directory_uri() . '/frontie/dist/css/main.css', array(), $css_version );
-		wp_enqueue_script( 'susty-vendor', get_template_directory_uri() . '/frontie/dist/js/vendor.js', array(), $theme_version, true);
+		$css_version = $theme_version . '.' . filemtime(get_template_directory() . '/dist/css/main.css');
+		wp_enqueue_style( 'susty-styles', get_stylesheet_directory_uri() . '/dist/css/main.css', array(), $css_version );
+		wp_enqueue_script( 'susty-vendor', get_template_directory_uri() . '/dist/js/vendor.js', array(), $theme_version, true);
 
-		$js_version = $theme_version . '.' . filemtime(get_template_directory() . '/frontie/dist/js/app.js');
-		wp_enqueue_script( 'susty-scripts', get_template_directory_uri() . '/frontie/dist/js/app.js', array(), $js_version, true );
+		$js_version = $theme_version . '.' . filemtime(get_template_directory() . '/dist/js/app.js');
+		wp_enqueue_script( 'susty-scripts', get_template_directory_uri() . '/dist/js/app.js', array(), $js_version, true );
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}

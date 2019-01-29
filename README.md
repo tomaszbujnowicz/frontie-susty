@@ -30,7 +30,7 @@ Clone this repository, go to /frontie folder and run
 - `yarn` or `npm install` to install dependencies
 
 ### WordPress
-Go to /frontie/gulpfile.babel.js/config.js and modify wp.proxy URL from `YOURSITE.local` to your local URL
+Go to /gulpfile.babel.js/config.js and modify wp.proxy URL from `YOURSITE.local` to your local URL
 
 ### Tasks
 | Task Name | Description | Environment |
